@@ -1,0 +1,8 @@
+smarty:
+  plugins_dir:
+    - /home/sites/sdx/plugins/smarty
+    - /home/sites/magazine/common/plugins/smarty
+
+trusted_ip:
+  -  113.35.96.2
+  -  153.142.74.56
