@@ -4,6 +4,12 @@
 
 # https://github.com/SunriseDigital/sdx/blob/master/initapp
 
+### ディレクトリ名を取得
+script_dir=`dirname $0`
+
+#共通関数をinclude
+. /home/source/sites/sdx/bin/func
+
 ### 引数チェック
 #target_dir
 if [ -n "$1" ]
