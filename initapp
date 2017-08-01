@@ -92,41 +92,37 @@ chmod 0777 ${app_dir}/tmp/templates_c
 
 ### ファイルをコピー
 cp_from(\
-	${script_dir}/config/magazine/category.yml \
-	${script_dir}/config/magazine/group.yml \
-	${script_dir}/config/magazine/list.yml \
-	${script_dir}/config/Configuration.php \
-	${script_dir}/config/mobile_route.yml \
-	${script_dir}/config/route.yml \
-	${script_dir}/config/sys.yml \
-	${script_dir}/viwes/default/error/404.tpl \
-	${script_dir}/viwes/default/error/500.tpl \
-	${script_dir}/viwes/default/index/index.tpl \
-	${script_dir}/viwes/default/magazine/article/1/body.tpl \
-	${script_dir}/viwes/default/magazine/article/1/outline.tpl \
-	${script_dir}/viwes/default/magazine/article.tpl \
-	${script_dir}/viwes/default/magazine/base.tpl \
-	${script_dir}/viwes/default/magazine/category.tpl \
-	${script_dir}/viwes/default/magazine/group.tpl \
-	${script_dir}/viwes/default/magazine/index.tpl \
-	${script_dir}/viwes/mobile/error/404.tpl \
-	${script_dir}/viwes/mobile/error/500.tpl \
-	${script_dir}/viwes/mobile/index/index.tpl \
-	${script_dir}/viwes/mobile/magazine/article.tpl \
-	${script_dir}/viwes/mobile/magazine/base.tpl \
-	${script_dir}/viwes/mobile/magazine/category.tpl \
-	${script_dir}/viwes/mobile/magazine/group.tpl \
-	${script_dir}/viwes/mobile/magazine/index.tpl \
-	${script_dir}/web/index.php \
-	${script_dir}/web/mobile_index.php \
-	${script_dir}/gitignore
+	${script_dir}/copy/config/magazine/category.yml \
+	${script_dir}/copy/config/magazine/group.yml \
+	${script_dir}/copy/config/magazine/list.yml \
+	${script_dir}/copy/config/mobile_route.yml \
+	${script_dir}/copy/config/route.yml \
+	${script_dir}/copy/config/sys.yml \
+	${script_dir}/copy/viwes/default/error/404.tpl \
+	${script_dir}/copy/viwes/default/error/500.tpl \
+	${script_dir}/copy/viwes/default/index/index.tpl \
+	${script_dir}/copy/viwes/default/magazine/article/1/body.tpl \
+	${script_dir}/copy/viwes/default/magazine/article/1/outline.tpl \
+	${script_dir}/copy/viwes/default/magazine/article.tpl \
+	${script_dir}/copy/viwes/default/magazine/base.tpl \
+	${script_dir}/copy/viwes/default/magazine/category.tpl \
+	${script_dir}/copy/viwes/default/magazine/group.tpl \
+	${script_dir}/copy/viwes/default/magazine/index.tpl \
+	${script_dir}/copy/viwes/mobile/error/404.tpl \
+	${script_dir}/copy/viwes/mobile/error/500.tpl \
+	${script_dir}/copy/viwes/mobile/index/index.tpl \
+	${script_dir}/copy/viwes/mobile/magazine/article.tpl \
+	${script_dir}/copy/viwes/mobile/magazine/base.tpl \
+	${script_dir}/copy/viwes/mobile/magazine/category.tpl \
+	${script_dir}/copy/viwes/mobile/magazine/group.tpl \
+	${script_dir}/copy/viwes/mobile/magazine/index.tpl \
+	${script_dir}/copy/gitignore
 )
 
 cp_to(\
 	${app_dir}/config/magazine/category.yml \
 	${app_dir}/config/magazine/group.yml \
 	${app_dir}/config/magazine/list.yml \
-	${app_dir}/config/Configuration.php \
 	${app_dir}/config/mobile_route.yml \
 	${app_dir}/config/route.yml \
 	${app_dir}/config/sys.yml \
@@ -148,8 +144,6 @@ cp_to(\
 	${app_dir}/app/viwes/mobile/magazine/category.tpl \
 	${app_dir}/app/viwes/mobile/magazine/group.tpl \
 	${app_dir}/app/viwes/mobile/magazine/index.tpl \
-	${target_dir}/index.php \
-	${target_dir}/mobile_index.php \
 	${app_dir}/.gitignore
 )
 
@@ -188,6 +182,20 @@ then
 else
 	symlinkFromArray
 fi
+
+### テキスト内に置換の必要なファイル群
+replaceAndCopy ${sdx_dir}/copy/sunrise ${app_dir}/sunrise
+
+if [ ! -x ${app_dir}/sunrise ]
+then
+	chmod 0777 ${app_dir}/sunrise
+fi
+
+replaceAndCopy ${script_dir}/copy/web/index.php ${target_dir}/index.php
+replaceAndCopy ${script_dir}/copy/web/mobile_index.php ${target_dir}/mobile_index.php
+
+replaceAndCopy ${script_dir}/copy/config/Configuration.php ${app_dir}/config/Configuration.php
+
 
 # 対象：app_dir
 
