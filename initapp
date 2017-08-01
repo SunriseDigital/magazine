@@ -77,7 +77,7 @@ mkdirs=(\
 	${app_dir}/log \
 	${app_dir}/logs \
 	${app_dir}/tmp \
-	${app_dir}/templates_c
+	${app_dir}/tmp/templates_c
 )
 
 ### 作成実行
