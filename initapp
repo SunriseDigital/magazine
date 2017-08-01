@@ -78,6 +78,13 @@ mkdirs=(\
 #mkdirFromArray
 
 
+### 書き込みディレクトリのパーミッション変更
+chmod 0777 ${app_dir}/cache
+chmod 0777 ${app_dir}/log
+chmod 0777 ${app_dir}/logs
+chmod 0777 ${app_dir}/tmp
+chmod 0777 ${app_dir}/tmp/templates_c
+
 # 対象：app_dir
 
 # TODO: app/ 作成
