@@ -9,19 +9,74 @@
 if [ -n "$1" ]
 then
 	target_dir=$1
+
+	first_chr=`echo ${target_dir} | cut -c 1`
+	if [ "$first_chr" != / ]
+	then
+		echo Use full path start from "/" for target_dir
+		exit
+	fi
+
+	target_name=`echo ${target_dir} | sed -e "s/.*\/\([^/]*\)\$/\1/g"`
+
 else
 	echo Please enter /path/to/target_dir.
 	exit
 fi
 
 #app_dir
-if [ -n "$2"]
+if [ -n "$2" ]
 then
 	app_dir=$2
+
+	first_chr=`echo ${app_dir} | cut -c 1`
+	if [ "$first_chr" != / ]
+	then
+		echo Use full path start from "/" for app_dir
+		exit
+	fi
+
+	app_name=`echo ${app_dir} | sed -e "s/.*\/\([^/]*\)\$/\1/g"`
+
 else
 	echo Please enter /path/to/app_dir.
 	exit
 fi
+
+
+### ディレクトリ作成
+mkdirs=(\
+	${target_dir}/css \
+	${target_dir}/css/i18n \
+	${target_dir}/img \
+	${target_dir}/img/i18n \
+	${target_dir}/js \
+	${target_dir}/js/i18n \
+	${app_dir}/app \
+	${app_dir}/app/views \
+	${app_dir}/app/views/default \
+	${app_dir}/app/views/default/error \
+	${app_dir}/app/views/default/index \
+	${app_dir}/app/views/default/magazine \
+	${app_dir}/app/views/i18n \
+	${app_dir}/app/views/mobile \
+	${app_dir}/app/views/mobile/error \
+	${app_dir}/app/views/mobile/index \
+	${app_dir}/app/views/mobile/magazine \
+	${app_dir}/cache \
+	${app_dir}/config \
+	${app_dir}/config/i18n \
+	${app_dir}/config/magazine \
+	${app_dir}/i18n \
+	${app_dir}/log \
+	${app_dir}/logs \
+	${app_dir}/tmp \
+	${app_dir}/templates_c
+)
+
+### 作成実行
+#mkdirFromArray
+
 
 # 対象：app_dir
 
