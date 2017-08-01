@@ -49,7 +49,6 @@ else
 	exit
 fi
 
-
 ### ディレクトリ作成
 mkdirs=(\
 	${target_dir}/css \
@@ -90,6 +89,73 @@ chmod 0777 ${app_dir}/log
 chmod 0777 ${app_dir}/logs
 chmod 0777 ${app_dir}/tmp
 chmod 0777 ${app_dir}/tmp/templates_c
+
+### ファイルをコピー
+cp_from(\
+	${script_dir}/config/magazine/category.yml \
+	${script_dir}/config/magazine/group.yml \
+	${script_dir}/config/magazine/list.yml \
+	${script_dir}/config/Configuration.php \
+	${script_dir}/config/mobile_route.yml \
+	${script_dir}/config/route.yml \
+	${script_dir}/config/sys.yml \
+	${script_dir}/viwes/default/error/404.tpl \
+	${script_dir}/viwes/default/error/500.tpl \
+	${script_dir}/viwes/default/index/index.tpl \
+	${script_dir}/viwes/default/magazine/article/1/body.tpl \
+	${script_dir}/viwes/default/magazine/article/1/outline.tpl \
+	${script_dir}/viwes/default/magazine/article.tpl \
+	${script_dir}/viwes/default/magazine/base.tpl \
+	${script_dir}/viwes/default/magazine/category.tpl \
+	${script_dir}/viwes/default/magazine/group.tpl \
+	${script_dir}/viwes/default/magazine/index.tpl \
+	${script_dir}/viwes/mobile/error/404.tpl \
+	${script_dir}/viwes/mobile/error/500.tpl \
+	${script_dir}/viwes/mobile/index/index.tpl \
+	${script_dir}/viwes/mobile/magazine/article.tpl \
+	${script_dir}/viwes/mobile/magazine/base.tpl \
+	${script_dir}/viwes/mobile/magazine/category.tpl \
+	${script_dir}/viwes/mobile/magazine/group.tpl \
+	${script_dir}/viwes/mobile/magazine/index.tpl \
+	${script_dir}/web/index.php \
+	${script_dir}/web/mobile_index.php \
+	${script_dir}/gitignore
+)
+
+cp_to(\
+	${app_dir}/config/magazine/category.yml \
+	${app_dir}/config/magazine/group.yml \
+	${app_dir}/config/magazine/list.yml \
+	${app_dir}/config/Configuration.php \
+	${app_dir}/config/mobile_route.yml \
+	${app_dir}/config/route.yml \
+	${app_dir}/config/sys.yml \
+	${app_dir}/app/viwes/default/error/404.tpl \
+	${app_dir}/app/viwes/default/error/500.tpl \
+	${app_dir}/app/viwes/default/index/index.tpl \
+	${app_dir}/app/viwes/default/magazine/article/1/body.tpl \
+	${app_dir}/app/viwes/default/magazine/article/1/outline.tpl \
+	${app_dir}/app/viwes/default/magazine/article.tpl \
+	${app_dir}/app/viwes/default/magazine/base.tpl \
+	${app_dir}/app/viwes/default/magazine/category.tpl \
+	${app_dir}/app/viwes/default/magazine/group.tpl \
+	${app_dir}/app/viwes/default/magazine/index.tpl \
+	${app_dir}/app/viwes/mobile/error/404.tpl \
+	${app_dir}/app/viwes/mobile/error/500.tpl \
+	${app_dir}/app/viwes/mobile/index/index.tpl \
+	${app_dir}/app/viwes/mobile/magazine/article.tpl \
+	${app_dir}/app/viwes/mobile/magazine/base.tpl \
+	${app_dir}/app/viwes/mobile/magazine/category.tpl \
+	${app_dir}/app/viwes/mobile/magazine/group.tpl \
+	${app_dir}/app/viwes/mobile/magazine/index.tpl \
+	${target_dir}/index.php \
+	${target_dir}/mobile_index.php \
+	${app_dir}/.gitignore
+)
+
+### コピー実行
+copyFromArray
+
 
 # 対象：app_dir
 
