@@ -1,7 +1,9 @@
 #!/bin/bash
 #
 #/path/to/initapp /path/to/target_dir /path/to/app_dir
+#/home/sites/magazine/initapp /home/sites/www.gangan.bz/html/magazine /home/sites/www.gangan.bz/sd_app
 
+# TODO: 最後は削除しておく
 # https://github.com/SunriseDigital/sdx/blob/master/initapp
 
 ### ディレクトリ名を取得
@@ -196,4 +198,17 @@ replaceAndCopy ${script_dir}/copy/web/mobile_index.php ${target_dir}/mobile_inde
 
 replaceAndCopy ${script_dir}/copy/config/Configuration.php ${app_dir}/config/Configuration.php
 
+### .gitkeep
+touch ${target_dir}/css/i18n/.gitkeep
+touch ${target_dir}/img/i18n/.gitkeep
+touch ${target_dir}/js/i18n/.gitkeep
 
+touch ${app_dir}/app/views/i18n/.gitkeep
+touch ${app_dir}/cache/.gitkeep
+touch ${app_dir}/config/i18n/.gitkeep
+touch ${app_dir}/i18n/.gitkeep
+touch ${app_dir}/log/.gitkeep
+touch ${app_dir}/logs/.gitkeep
+touch ${app_dir}/tmp/templates_c/.gitkeep
+
+echo .gitkeep to some directories.
