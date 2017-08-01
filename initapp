@@ -80,8 +80,7 @@ mkdirs=(\
 )
 
 ### 作成実行
-#mkdirFromArray
-
+mkdirFromArray
 
 ### 書き込みディレクトリのパーミッション変更
 chmod 0777 ${app_dir}/cache
