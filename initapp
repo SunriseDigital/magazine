@@ -8,7 +8,8 @@
 script_dir=`dirname $0`
 
 #共通関数をinclude
-. /home/source/sites/sdx/bin/func
+sdx_dir="/home/source/sites/sdx"
+. ${sdx_dir}/bin/func
 
 ### 引数チェック
 #target_dir
@@ -155,6 +156,38 @@ cp_to(\
 ### コピー実行
 copyFromArray
 
+### シンボリックリンク作成
+ln_from=(\
+	${script_dir}/application/controllers \
+	${script_dir}/common/views \
+	${sdx_dir}/views \
+	${script_dir}/common/config \
+	${sdx_dir}/config \
+	${script_dir}/common/css \
+	${sdx_dir}/css \
+	${script_dir}/common/js \
+	${sdx_dir}/js
+)
+
+ln_to(\
+	${app_dir}/app/controllers \
+	${app_dir}/app/views/global \
+	${app_dir}/app/views/sdx \
+	${app_dir}/config/global \
+	${app_dir}/config/sdx \
+	${target_dir}/css/global \
+	${target_dir}/css/sdx \
+	${target_dir}/js/global \
+	${target_dir}/js/sdx
+)
+
+### リンク作成
+if [ "$force_symlink" = "TRUE" ]
+then
+	symlinkFromArrayForce
+else
+	symlinkFromArray
+fi
 
 # 対象：app_dir
 
