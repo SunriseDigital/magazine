@@ -1,7 +1,6 @@
 #!/bin/bash
 #
 #/path/to/initapp /path/to/target_dir /path/to/app_dir
-#/home/sites/magazine/initapp /home/sites/www.gangan.bz/html/magazine /home/sites/www.gangan.bz/sd_app
 
 # TODO: 最後は削除しておく
 # https://github.com/SunriseDigital/sdx/blob/master/initapp
