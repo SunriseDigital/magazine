@@ -1,0 +1,29 @@
+routes:
+
+  magazine:
+    route:        /
+    defaults:
+      module:     mobile
+      controller: magazine
+      action:     index
+
+  magazine_group:
+    route:        /:group_id
+    defaults:
+      module:     mobile
+      controller: magazine
+      action:     group
+
+  magazine_category:
+    route:        /:group_id/:category_id
+    defaults:
+      module:     mobile
+      controller: magazine
+      action:     category
+
+  magazine_article:
+    route:        /:group_id/:category_id/:article_id
+    defaults:
+      module:     mobile
+      controller: magazine
+      action:     article
