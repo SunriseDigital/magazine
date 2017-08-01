@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+#/path/to/initapp /path/to/target_dir /path/to/app_dir
+
+# https://github.com/SunriseDigital/sdx/blob/master/initapp
+
+### 引数チェック
+#target_dir
+if [ -n "$1" ]
+then
+	target_dir=$1
+else
+	echo Please enter /path/to/target_dir.
+	exit
+fi
+
+#app_dir
+if [ -n "$2"]
+then
+	app_dir=$2
+else
+	echo Please enter /path/to/app_dir.
+	exit
+fi
+
+# 対象：app_dir
+
+# TODO: app/ 作成
+
+# TODO: app/controllers -> /home/source/sites/magazine/application/controllers シンボリックリンク作成
+
+# TODO: app/views にviewsディレクトリをコピー
+# TODO: app/views/global -> /home/source/sites/magazine/common/views シンボリックリンク作成
+# TODO: app/views/sdx -> /home/source/sites/sdx/views シンボリックリンク作成
+
+# TODO: cache/ 作成
+
+# TODO: config にconfigディレクトリをコピー
+# TODO: config/global -> /home/source/sites/magazine/common/config シンボリックリンク作成
+# TODO: config/sdx -> /home/source/sites/sdx/config シンボリックリンク作成
+# TODO: config/i18n/ 作成
+
+# TODO: i18n/ 作成
+
+# TODO: log/ 作成
+
+# TODO: logs/ 作成
+
+# TODO: tmp/ 作成
+
+# TODO: sunrise コピー
+
+
+# 対象：target_dir
+
+# TODO: webディレクトリをコピー
+
+# TODO: css/ 作成
+# TODO: css/i18n 作成
+# TODO: css/global -> /home/source/sites/magazine/common/css シンボリックリンク作成
+
+# TODO: js/ 作成
+# TODO: js/i18n 作成
+# TODO: js/global -> /home/source/sites/magazine/common/js シンボリックリンク作成
+# TODO: js/sdx -> /home/source/sites/sdx/js シンボリックリンク作成
