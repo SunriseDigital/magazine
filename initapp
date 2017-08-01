@@ -158,6 +158,7 @@ copyFromArray
 ln_from=(\
 	${script_dir}/common/css \
 	${sdx_dir}/css \
+	${script_dir}/common/img \
 	${script_dir}/common/js \
 	${sdx_dir}/js
 	${script_dir}/application/controllers \
@@ -167,9 +168,10 @@ ln_from=(\
 	${sdx_dir}/config \
 )
 
-ln_to(\
+ln_to=(\
 	${target_dir}/css/global \
 	${target_dir}/css/sdx \
+	${target_dir}/img/global \
 	${target_dir}/js/global \
 	${target_dir}/js/sdx
 	${app_dir}/app/controllers \
