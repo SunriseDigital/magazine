@@ -118,6 +118,7 @@ cp_from(\
 	${script_dir}/copy/viwes/mobile/magazine/category.tpl \
 	${script_dir}/copy/viwes/mobile/magazine/group.tpl \
 	${script_dir}/copy/viwes/mobile/magazine/index.tpl \
+	${script_dir}/copy/web/htaccess \
 	${script_dir}/copy/gitignore
 )
 
@@ -146,6 +147,7 @@ cp_to(\
 	${app_dir}/app/viwes/mobile/magazine/category.tpl \
 	${app_dir}/app/viwes/mobile/magazine/group.tpl \
 	${app_dir}/app/viwes/mobile/magazine/index.tpl \
+	${target_dir}/.htaccess \
 	${app_dir}/.gitignore
 )
 
