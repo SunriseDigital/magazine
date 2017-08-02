@@ -2,8 +2,7 @@
 
 require_once '/home/sites/sdx/models/Sdx/Context.php';
 
-chdir(dirname(__FILE__).'/../');
-$base = '.';
+$base = '%CONTEXT_DIR%';
 
 $context = Sdx_Context::create('/home/sites/magazine/common', 'Site_Environment_Http_Pc', array(
   'base'   => $base,

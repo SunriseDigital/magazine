@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -s
+RewriteRule ^.*$ - [NC,L]
+
+RewriteCond %{HTTP_USER_AGENT} (?:iPhone|Android.*Mobile|Windows.*Phone) [NC]
+RewriteRule ^(.*)$ mobile_index.php [NC,L]
+
+RewriteRule ^.*$ index.php [NC,L]
