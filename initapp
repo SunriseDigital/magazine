@@ -5,6 +5,15 @@
 # TODO: 最後は削除しておく
 # https://github.com/SunriseDigital/sdx/blob/master/initapp
 
+### オプション解析
+# -f シンボリックリンクを強制的に作る
+while getopts f OPT
+do
+	case $OPT in
+		"f" ) force_symlink="TRUE" ;;
+	esac
+done
+
 ### ディレクトリ名を取得
 script_dir=`dirname $0`
 
