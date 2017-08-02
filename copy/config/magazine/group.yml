@@ -1,5 +1,5 @@
 ### グループマスタ
 
-# - id: 1
-#   code: group_code
-#   name: グループ名
+- id: 1
+  code: group_code
+  name: グループ名
