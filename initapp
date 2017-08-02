@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#/path/to/initapp /path/to/target_dir /path/to/app_dir
+#/path/to/initapp /path/to/target_dir /path/to/context_dir
 
 # TODO: 最後は削除しておく
 # https://github.com/SunriseDigital/sdx/blob/master/initapp
@@ -32,22 +32,22 @@ else
 	exit
 fi
 
-#app_dir
+#context_dir
 if [ -n "$2" ]
 then
-	app_dir=$2
+	context_dir=$2
 
-	first_chr=`echo ${app_dir} | cut -c 1`
+	first_chr=`echo ${context_dir} | cut -c 1`
 	if [ "$first_chr" != / ]
 	then
-		echo Use full path start from "/" for app_dir
+		echo Use full path start from "/" for context_dir
 		exit
 	fi
 
-	app_name=`echo ${app_dir} | sed -e "s/.*\/\([^/]*\)\$/\1/g"`
+	app_name=`echo ${context_dir} | sed -e "s/.*\/\([^/]*\)\$/\1/g"`
 
 else
-	echo Please enter /path/to/app_dir.
+	echo Please enter /path/to/context_dir.
 	exit
 fi
 
@@ -59,43 +59,44 @@ mkdirs=(\
 	${target_dir}/img/i18n \
 	${target_dir}/js \
 	${target_dir}/js/i18n \
-	${app_dir}/app \
-	${app_dir}/app/views \
-	${app_dir}/app/views/default \
-	${app_dir}/app/views/default/error \
-	${app_dir}/app/views/default/index \
-	${app_dir}/app/views/default/magazine \
-	${app_dir}/app/views/i18n \
-	${app_dir}/app/views/mobile \
-	${app_dir}/app/views/mobile/error \
-	${app_dir}/app/views/mobile/index \
-	${app_dir}/app/views/mobile/magazine \
-	${app_dir}/cache \
-	${app_dir}/config \
-	${app_dir}/config/i18n \
-	${app_dir}/config/magazine \
-	${app_dir}/i18n \
-	${app_dir}/log \
-	${app_dir}/logs \
-	${app_dir}/tmp \
-	${app_dir}/tmp/templates_c
+	${context_dir}/app \
+	${context_dir}/app/views \
+	${context_dir}/app/views/default \
+	${context_dir}/app/views/default/error \
+	${context_dir}/app/views/default/index \
+	${context_dir}/app/views/default/magazine \
+	${context_dir}/app/views/i18n \
+	${context_dir}/app/views/mobile \
+	${context_dir}/app/views/mobile/error \
+	${context_dir}/app/views/mobile/index \
+	${context_dir}/app/views/mobile/magazine \
+	${context_dir}/cache \
+	${context_dir}/config \
+	${context_dir}/config/i18n \
+	${context_dir}/config/magazine \
+	${context_dir}/i18n \
+	${context_dir}/log \
+	${context_dir}/logs \
+	${context_dir}/tmp \
+	${context_dir}/tmp/templates_c
 )
 
 ### 作成実行
 mkdirFromArray
 
 ### 書き込みディレクトリのパーミッション変更
-chmod 0777 ${app_dir}/cache
-chmod 0777 ${app_dir}/log
-chmod 0777 ${app_dir}/logs
-chmod 0777 ${app_dir}/tmp
-chmod 0777 ${app_dir}/tmp/templates_c
+chmod 0777 ${context_dir}/cache
+chmod 0777 ${context_dir}/log
+chmod 0777 ${context_dir}/logs
+chmod 0777 ${context_dir}/tmp
+chmod 0777 ${context_dir}/tmp/templates_c
 
 ### ファイルをコピー
 cp_from=(\
 	${script_dir}/copy/config/magazine/category.yml \
 	${script_dir}/copy/config/magazine/group.yml \
 	${script_dir}/copy/config/magazine/list.yml \
+	${script_dir}/copy/config/Configuration.php \
 	${script_dir}/copy/config/mobile_route.yml \
 	${script_dir}/copy/config/route.yml \
 	${script_dir}/copy/config/sys.yml \
@@ -122,32 +123,33 @@ cp_from=(\
 )
 
 cp_to=(\
-	${app_dir}/config/magazine/category.yml \
-	${app_dir}/config/magazine/group.yml \
-	${app_dir}/config/magazine/list.yml \
-	${app_dir}/config/mobile_route.yml \
-	${app_dir}/config/route.yml \
-	${app_dir}/config/sys.yml \
-	${app_dir}/app/views/default/error/404.tpl \
-	${app_dir}/app/views/default/error/500.tpl \
-	${app_dir}/app/views/default/index/index.tpl \
-	${app_dir}/app/views/default/magazine/article/1/body.tpl \
-	${app_dir}/app/views/default/magazine/article/1/outline.tpl \
-	${app_dir}/app/views/default/magazine/article.tpl \
-	${app_dir}/app/views/default/magazine/base.tpl \
-	${app_dir}/app/views/default/magazine/category.tpl \
-	${app_dir}/app/views/default/magazine/group.tpl \
-	${app_dir}/app/views/default/magazine/index.tpl \
-	${app_dir}/app/views/mobile/error/404.tpl \
-	${app_dir}/app/views/mobile/error/500.tpl \
-	${app_dir}/app/views/mobile/index/index.tpl \
-	${app_dir}/app/views/mobile/magazine/article.tpl \
-	${app_dir}/app/views/mobile/magazine/base.tpl \
-	${app_dir}/app/views/mobile/magazine/category.tpl \
-	${app_dir}/app/views/mobile/magazine/group.tpl \
-	${app_dir}/app/views/mobile/magazine/index.tpl \
+	${context_dir}/config/magazine/category.yml \
+	${context_dir}/config/magazine/group.yml \
+	${context_dir}/config/magazine/list.yml \
+	${context_dir}/config/Configuration.php \
+	${context_dir}/config/mobile_route.yml \
+	${context_dir}/config/route.yml \
+	${context_dir}/config/sys.yml \
+	${context_dir}/app/views/default/error/404.tpl \
+	${context_dir}/app/views/default/error/500.tpl \
+	${context_dir}/app/views/default/index/index.tpl \
+	${context_dir}/app/views/default/magazine/article/1/body.tpl \
+	${context_dir}/app/views/default/magazine/article/1/outline.tpl \
+	${context_dir}/app/views/default/magazine/article.tpl \
+	${context_dir}/app/views/default/magazine/base.tpl \
+	${context_dir}/app/views/default/magazine/category.tpl \
+	${context_dir}/app/views/default/magazine/group.tpl \
+	${context_dir}/app/views/default/magazine/index.tpl \
+	${context_dir}/app/views/mobile/error/404.tpl \
+	${context_dir}/app/views/mobile/error/500.tpl \
+	${context_dir}/app/views/mobile/index/index.tpl \
+	${context_dir}/app/views/mobile/magazine/article.tpl \
+	${context_dir}/app/views/mobile/magazine/base.tpl \
+	${context_dir}/app/views/mobile/magazine/category.tpl \
+	${context_dir}/app/views/mobile/magazine/group.tpl \
+	${context_dir}/app/views/mobile/magazine/index.tpl \
 	${target_dir}/.htaccess \
-	${app_dir}/.gitignore
+	${context_dir}/.gitignore
 )
 
 ### コピー実行
@@ -173,11 +175,11 @@ ln_to=(\
 	${target_dir}/img/global \
 	${target_dir}/js/global \
 	${target_dir}/js/sdx
-	${app_dir}/app/controllers \
-	${app_dir}/app/views/global \
-	${app_dir}/app/views/sdx \
-	${app_dir}/config/global \
-	${app_dir}/config/sdx \
+	${context_dir}/app/controllers \
+	${context_dir}/app/views/global \
+	${context_dir}/app/views/sdx \
+	${context_dir}/config/global \
+	${context_dir}/config/sdx \
 )
 
 ### リンク作成
@@ -189,29 +191,27 @@ else
 fi
 
 ### テキスト内に置換の必要なファイル群
-replaceAndCopy ${sdx_dir}/copy/sunrise ${app_dir}/sunrise
+replaceAndCopy ${sdx_dir}/copy/sunrise ${context_dir}/sunrise
 
-if [ ! -x ${app_dir}/sunrise ]
+if [ ! -x ${context_dir}/sunrise ]
 then
-	chmod 0777 ${app_dir}/sunrise
+	chmod 0777 ${context_dir}/sunrise
 fi
 
 replaceAndCopy ${script_dir}/copy/web/index.php ${target_dir}/index.php
 replaceAndCopy ${script_dir}/copy/web/mobile_index.php ${target_dir}/mobile_index.php
-
-replaceAndCopy ${script_dir}/copy/config/Configuration.php ${app_dir}/config/Configuration.php
 
 ### .gitkeep
 touch ${target_dir}/css/i18n/.gitkeep
 touch ${target_dir}/img/i18n/.gitkeep
 touch ${target_dir}/js/i18n/.gitkeep
 
-touch ${app_dir}/app/views/i18n/.gitkeep
-touch ${app_dir}/cache/.gitkeep
-touch ${app_dir}/config/i18n/.gitkeep
-touch ${app_dir}/i18n/.gitkeep
-touch ${app_dir}/log/.gitkeep
-touch ${app_dir}/logs/.gitkeep
-touch ${app_dir}/tmp/templates_c/.gitkeep
+touch ${context_dir}/app/views/i18n/.gitkeep
+touch ${context_dir}/cache/.gitkeep
+touch ${context_dir}/config/i18n/.gitkeep
+touch ${context_dir}/i18n/.gitkeep
+touch ${context_dir}/log/.gitkeep
+touch ${context_dir}/logs/.gitkeep
+touch ${context_dir}/tmp/templates_c/.gitkeep
 
 echo .gitkeep to some directories.
