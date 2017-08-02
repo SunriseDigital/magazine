@@ -2,7 +2,7 @@
 
 {block name='pagetitle'}{foreach $category_list as $category}{if $params.category_id == $category.id}{$category.name}記事一覧{/if}{/foreach}{/block}
 {block name='description'}{foreach $category_list as $category}{if $params.category_id == $category.id}{$category.name}の記事一覧ページです{/if}{/foreach}{/block}
-{block name='canonical' prepend}<link rel="canonical" href="//{$smarty.server.SERVER_NAME}/magazine/{$params.group_id}/{$params.category_id}/">{/block}{* URL正規化 *}
+{block name='canonical' prepend}<link rel="canonical" href="//{$smarty.server.SERVER_NAME}/magazine/{$params.group_id}/{$params.category_id}/">{/block}
 {block name='alternate' append}<link rel="alternate" media="only screen and (max-width: 640px)" href="//{$smarty.server.SERVER_NAME}/magazine/{$params.group_id}/{$params.category_id}/">{/block}
 
 {block name='bread_crumb'}

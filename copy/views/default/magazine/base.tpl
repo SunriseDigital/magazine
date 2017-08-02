@@ -15,14 +15,15 @@
   <meta name="robots" content="index,follow">
   {/if}
   {/block}
-  {block name='canonical'}{/block}{* URL正規化 *}
+  {block name='canonical'}{/block}
   {block name='alternate'}{/block}
   {block name='css'}{/block}
-  {block name='js'}{/block}
+  {block name='js_head'}{/block}
 </head>
 <body>
   {block name='bread_crumb'}{/block}
   {block name='main-column-primary'}{/block}
+  {block name='js_body'}{/block}
 </body>
 </html>
 {/strip}

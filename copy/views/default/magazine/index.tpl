@@ -3,7 +3,7 @@
 {block name="pagetitle"}マガジン{/block}
 {block name='description'}{/block}
 {block name='keywords'}{/block}
-{block name='canonical' prepend}<link rel="canonical" href="//{$smarty.server.SERVER_NAME}/magazine/">{/block}{* URL正規化 *}
+{block name='canonical' prepend}<link rel="canonical" href="//{$smarty.server.SERVER_NAME}/magazine/">{/block}
 {block name='alternate' append}<link rel="alternate" media="only screen and (max-width: 640px)" href="//{$smarty.server.SERVER_NAME}/magazine/">{/block}
 
 {block name='bread_crumb'}

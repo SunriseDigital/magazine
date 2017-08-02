@@ -2,7 +2,7 @@
 
 {block name='pagetitle'}{$article.title}{/block}
 {block name='description'}「{$article.title}」に関するページです{/block}
-{block name='canonical' prepend}<link rel="canonical" href="//{$smarty.server.SERVER_NAME}/magazine/{$params.group_id}/{$params.category_id}/{$params.article_id}/">{/block}{* URL正規化 *}
+{block name='canonical' prepend}<link rel="canonical" href="//{$smarty.server.SERVER_NAME}/magazine/{$params.group_id}/{$params.category_id}/{$params.article_id}/">{/block}
 {block name='alternate' append}<link rel="alternate" media="only screen and (max-width: 640px)" href="//{$smarty.server.SERVER_NAME}/magazine/{$params.group_id}/{$params.category_id}/{$params.article_id}/">{/block}
 
 {block name='bread_crumb'}
