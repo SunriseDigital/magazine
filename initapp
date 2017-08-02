@@ -2,9 +2,6 @@
 #
 #/path/to/initapp /path/to/target_dir /path/to/context_dir
 
-# TODO: 最後は削除しておく
-# https://github.com/SunriseDigital/sdx/blob/master/initapp
-
 ### オプション解析
 # -f シンボリックリンクを強制的に作る
 while getopts f OPT
