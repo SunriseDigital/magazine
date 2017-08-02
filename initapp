@@ -2,6 +2,18 @@
 #
 #/path/to/initapp /path/to/target_dir /path/to/context_dir
 
+### sdx確認
+sdx_dir="/home/source/sites/sdx"
+
+#共通関数をinclude
+if [ -r $sdx_dir ]
+then
+	. ${sdx_dir}/bin/func
+else
+	echo Require sdx framework.
+	exit
+fi
+
 ### オプション解析
 # -f シンボリックリンクを強制的に作る
 while getopts f OPT
@@ -13,10 +25,6 @@ done
 
 ### ディレクトリ名を取得
 script_dir=`dirname $0`
-
-#共通関数をinclude
-sdx_dir="/home/source/sites/sdx"
-. ${sdx_dir}/bin/func
 
 ### 引数チェック
 #target_dir
