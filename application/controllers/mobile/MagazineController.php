@@ -88,6 +88,16 @@ class Mobile_MagazineController extends Site_Controller_Action_Http_Mobile
     $this->view->assign('article', $article);
   }
 
+  public function latestArticlesAction()
+  {
+    $params = $this->_getAllParams();
+
+    $limit = isset($params['limit']) ? $params['limit'] : 4;
+
+    $this->_requireAssign();
+    $this->view->assign('latest_articles', $this->_getArticleList($params, $limit));
+  }
+
   private function _requireAssign()
   {
     $this->view->assign('group_list', $this->_getGroupList());
