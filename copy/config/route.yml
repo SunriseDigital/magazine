@@ -27,3 +27,10 @@ routes:
       module:     default
       controller: magazine
       action:     article
+
+  magazine_latest:
+    route:        /latest-articles
+    defaults:
+      module:     default
+      controller: magazine
+      action:     latest-articles
