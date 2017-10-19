@@ -1,0 +1,6 @@
+### カテゴリマスタ
+
+- id: 1
+  group_id: 1
+  code: category_code
+  name: カテゴリ名

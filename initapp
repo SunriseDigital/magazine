@@ -1,0 +1,247 @@
+#!/bin/bash
+#
+#/path/to/initapp /path/to/web_dir /path/to/app_dir /path/to/sdx_dir
+
+### オプション解析
+# -f シンボリックリンクを強制的に作る
+while getopts f OPT
+do
+	case $OPT in
+		"f" ) force_symlink="TRUE" ;;
+	esac
+done
+
+### ディレクトリ名を取得
+script_dir=`dirname $0`
+
+### 引数チェック
+#web_dir
+if [ -n "$1" ]
+then
+	web_dir=$1
+	target_dir=$web_dir
+
+	first_chr=`echo ${web_dir} | cut -c 1`
+	if [ "$first_chr" != / ]
+	then
+		echo Use full path start from "/" for web_dir
+		exit
+	fi
+
+	target_name=`echo ${web_dir} | sed -e "s/.*\/\([^/]*\)\$/\1/g"`
+
+else
+	echo Please enter /path/to/web_dir.
+	exit
+fi
+
+#app_dir
+if [ -n "$2" ]
+then
+	app_dir=$2
+	context_dir=$app_dir
+
+	first_chr=`echo ${app_dir} | cut -c 1`
+	if [ "$first_chr" != / ]
+	then
+		echo Use full path start from "/" for app_dir
+		exit
+	fi
+
+	context_name=`echo ${app_dir} | sed -e "s/.*\/\([^/]*\)\$/\1/g"`
+
+else
+	echo Please enter /path/to/app_dir.
+	exit
+fi
+
+#sdx_dir
+if [ -n "$3" ]
+then
+	sdx_dir=$3
+
+	first_chr=`echo ${sdx_dir} | cut -c 1`
+	if [ "$first_chr" != / ]
+	then
+		echo Use full path start from "/" for sdx_dir
+		exit
+	fi
+
+else
+	echo Please enter /path/to/sdx_dir.
+	exit
+fi
+
+### 共通関数をinclude
+if [ -r $sdx_dir ]
+then
+	. ${sdx_dir}/bin/func
+else
+	echo Require sdx framework.
+	exit
+fi
+
+### ディレクトリ作成
+mkdirs=(\
+	${web_dir}/css \
+	${web_dir}/css/i18n \
+	${web_dir}/img \
+	${web_dir}/img/i18n \
+	${web_dir}/js \
+	${web_dir}/js/i18n \
+	${app_dir}/app \
+	${app_dir}/app/views \
+	${app_dir}/app/views/default \
+	${app_dir}/app/views/default/error \
+	${app_dir}/app/views/default/index \
+	${app_dir}/app/views/default/magazine \
+	${app_dir}/app/views/i18n \
+	${app_dir}/app/views/mobile \
+	${app_dir}/app/views/mobile/error \
+	${app_dir}/app/views/mobile/index \
+	${app_dir}/app/views/mobile/magazine \
+	${app_dir}/cache \
+	${app_dir}/config \
+	${app_dir}/config/i18n \
+	${app_dir}/config/magazine \
+	${app_dir}/i18n \
+	${app_dir}/log \
+	${app_dir}/logs \
+	${app_dir}/tmp \
+	${app_dir}/tmp/templates_c
+)
+
+### 作成実行
+mkdirFromArray
+
+### 書き込みディレクトリのパーミッション変更
+chmod 0777 ${app_dir}/cache
+chmod 0777 ${app_dir}/log
+chmod 0777 ${app_dir}/logs
+chmod 0777 ${app_dir}/tmp
+chmod 0777 ${app_dir}/tmp/templates_c
+
+### ファイルをコピー
+cp_from=(\
+	${script_dir}/copy/config/magazine/category.yml \
+	${script_dir}/copy/config/magazine/group.yml \
+	${script_dir}/copy/config/magazine/list.yml \
+	${script_dir}/copy/config/Configuration.php \
+	${script_dir}/copy/config/mobile_route.yml \
+	${script_dir}/copy/config/route.yml \
+	${script_dir}/copy/config/sys.yml \
+	${script_dir}/copy/views/default/error/404.tpl \
+	${script_dir}/copy/views/default/error/500.tpl \
+	${script_dir}/copy/views/default/index/index.tpl \
+	${script_dir}/copy/views/default/magazine/article/1/body.tpl \
+	${script_dir}/copy/views/default/magazine/article/1/outline.tpl \
+	${script_dir}/copy/views/default/magazine/article.tpl \
+	${script_dir}/copy/views/default/magazine/base.tpl \
+	${script_dir}/copy/views/default/magazine/category.tpl \
+	${script_dir}/copy/views/default/magazine/group.tpl \
+	${script_dir}/copy/views/default/magazine/index.tpl \
+	${script_dir}/copy/views/mobile/error/404.tpl \
+	${script_dir}/copy/views/mobile/error/500.tpl \
+	${script_dir}/copy/views/mobile/index/index.tpl \
+	${script_dir}/copy/views/mobile/magazine/article.tpl \
+	${script_dir}/copy/views/mobile/magazine/base.tpl \
+	${script_dir}/copy/views/mobile/magazine/category.tpl \
+	${script_dir}/copy/views/mobile/magazine/group.tpl \
+	${script_dir}/copy/views/mobile/magazine/index.tpl \
+	${script_dir}/copy/web/htaccess \
+	${script_dir}/copy/gitignore
+)
+
+cp_to=(\
+	${app_dir}/config/magazine/category.yml \
+	${app_dir}/config/magazine/group.yml \
+	${app_dir}/config/magazine/list.yml \
+	${app_dir}/config/Configuration.php \
+	${app_dir}/config/mobile_route.yml \
+	${app_dir}/config/route.yml \
+	${app_dir}/config/sys.yml \
+	${app_dir}/app/views/default/error/404.tpl \
+	${app_dir}/app/views/default/error/500.tpl \
+	${app_dir}/app/views/default/index/index.tpl \
+	${app_dir}/app/views/default/magazine/article/1/body.tpl \
+	${app_dir}/app/views/default/magazine/article/1/outline.tpl \
+	${app_dir}/app/views/default/magazine/article.tpl \
+	${app_dir}/app/views/default/magazine/base.tpl \
+	${app_dir}/app/views/default/magazine/category.tpl \
+	${app_dir}/app/views/default/magazine/group.tpl \
+	${app_dir}/app/views/default/magazine/index.tpl \
+	${app_dir}/app/views/mobile/error/404.tpl \
+	${app_dir}/app/views/mobile/error/500.tpl \
+	${app_dir}/app/views/mobile/index/index.tpl \
+	${app_dir}/app/views/mobile/magazine/article.tpl \
+	${app_dir}/app/views/mobile/magazine/base.tpl \
+	${app_dir}/app/views/mobile/magazine/category.tpl \
+	${app_dir}/app/views/mobile/magazine/group.tpl \
+	${app_dir}/app/views/mobile/magazine/index.tpl \
+	${web_dir}/.htaccess \
+	${app_dir}/.gitignore
+)
+
+### コピー実行
+copyFromArray
+
+### シンボリックリンク作成
+ln_from=(\
+	${script_dir}/common/css \
+	${sdx_dir}/css \
+	${script_dir}/common/img \
+	${script_dir}/common/js \
+	${sdx_dir}/js
+	${script_dir}/application/controllers \
+	${script_dir}/common/views \
+	${sdx_dir}/views \
+	${script_dir}/common/config \
+	${sdx_dir}/config \
+)
+
+ln_to=(\
+	${web_dir}/css/global \
+	${web_dir}/css/sdx \
+	${web_dir}/img/global \
+	${web_dir}/js/global \
+	${web_dir}/js/sdx
+	${app_dir}/app/controllers \
+	${app_dir}/app/views/global \
+	${app_dir}/app/views/sdx \
+	${app_dir}/config/global \
+	${app_dir}/config/sdx \
+)
+
+### リンク作成
+if [ "$force_symlink" = "TRUE" ]
+then
+	symlinkFromArrayForce
+else
+	symlinkFromArray
+fi
+
+### テキスト内に置換の必要なファイル群
+replaceAndCopy ${sdx_dir}/copy/sunrise ${app_dir}/sunrise
+
+if [ ! -x ${app_dir}/sunrise ]
+then
+	chmod 0777 ${app_dir}/sunrise
+fi
+
+replaceAndCopy ${script_dir}/copy/web/index.php ${web_dir}/index.php
+replaceAndCopy ${script_dir}/copy/web/mobile_index.php ${web_dir}/mobile_index.php
+
+### .gitkeep
+touch ${web_dir}/css/i18n/.gitkeep
+touch ${web_dir}/img/i18n/.gitkeep
+touch ${web_dir}/js/i18n/.gitkeep
+
+touch ${app_dir}/app/views/i18n/.gitkeep
+touch ${app_dir}/cache/.gitkeep
+touch ${app_dir}/config/i18n/.gitkeep
+touch ${app_dir}/i18n/.gitkeep
+touch ${app_dir}/log/.gitkeep
+touch ${app_dir}/logs/.gitkeep
+touch ${app_dir}/tmp/templates_c/.gitkeep
+
+echo .gitkeep to some directories.
